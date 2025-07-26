@@ -56,12 +56,10 @@ const reducer = ( state: CartStateType, action: ReducerAction ): CartStateType =
             return { ...state, cart: [...filterCart] };
         }
         case REDUCER_ACTION_TYPE.QUANTITY: {
-            if (action.payload) {
+            if (!action.payload) {
                 throw new Error("action.payload missing in QUANTITY action");
             }
-            if (!action.payload) {
-                throw new Error("action.payload missing in ADD action");
-            }
+
             const { sku, qty } = action.payload;
             const itemExists: CartItemType | undefined = state.cart.find(
                 (item) => item.sku === sku
